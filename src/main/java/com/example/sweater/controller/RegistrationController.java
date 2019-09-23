@@ -17,13 +17,13 @@ public class RegistrationController {
     private UserService userService;
 
     @GetMapping("/registration")
-    public String registration(){
+    public String registration() {
         return "registration";
     }
 
     @PostMapping("/registration")
-    public String addUser(User user, Map<String, Object> model){
-        if(!userService.addUser(user)){
+    public String addUser(User user, Map<String, Object> model) {
+        if (!userService.addUser(user)) {
             model.put("message", "User exists!");
             return "registration";
         }
@@ -32,13 +32,13 @@ public class RegistrationController {
     }
 
     @GetMapping("/activate/{code}")
-    public String activate(Model model, @PathVariable String code){
+    public String activate(Model model, @PathVariable String code) {
         boolean isActivated = userService.activateUser(code);
 
-        if(isActivated){
+        if (isActivated) {
             model.addAttribute("message", "User successfully activated");
         } else {
-            model.addAttribute("message", "Activation code not found");
+            model.addAttribute("message", "Activation code is not found!");
         }
 
         return "login";

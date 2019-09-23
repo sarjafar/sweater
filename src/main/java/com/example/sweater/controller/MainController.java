@@ -43,7 +43,7 @@ public class MainController {
         }
 
         model.addAttribute("messages", messages);
-        model.addAttribute("filter",filter);
+        model.addAttribute("filter", filter);
 
         return "main";
     }
@@ -52,15 +52,15 @@ public class MainController {
     public String add(
             @AuthenticationPrincipal User user,
             @RequestParam String text,
-            @RequestParam String tag,
-            Map<String, Object> model,
+            @RequestParam String tag, Map<String, Object> model,
             @RequestParam("file") MultipartFile file
     ) throws IOException {
         Message message = new Message(text, tag, user);
 
-        if(file != null && !file.getOriginalFilename().isEmpty()){
+        if (file != null && !file.getOriginalFilename().isEmpty()) {
             File uploadDir = new File(uploadPath);
-            if(!uploadDir.exists()){
+
+            if (!uploadDir.exists()) {
                 uploadDir.mkdir();
             }
 
@@ -78,5 +78,4 @@ public class MainController {
 
         return "main";
     }
-
 }
